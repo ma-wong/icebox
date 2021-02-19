@@ -51,51 +51,94 @@ $(document).ready(function() {
     }
 
     let selectedCategory = localStorage.getItem("style");
+
     if (selectedCategory) {
-        
-        $.ajax({
-            method: "POST",
-            url: "/api/shoes",
-            data: {
-                styles: [selectedCategory]
-            }
-        }).then(function(res) {
-            console.log(res);
 
-            for (elem of res) {
-                let newShoeCol = $("<div>");
-                newShoeCol.addClass("col-sm-4 col-xl-4");
-
-                let shoeCard = $("<div>");
-                shoeCard.addClass("card shoe");
-                
-                let shoeImg = $("<img>");
-                shoeImg.attr("src", elem.product_image);
-                shoeImg.addClass("card-img-top");
-                shoeImg.attr("alt", "a cute shoe");
-                
-                let shoeCardBody = $("<div>");
-                shoeCardBody.addClass("card-body");
-                
-                let shoeCardName = $("<p>");
-                shoeCardName.addClass("card-text");
-                shoeCardName.text(elem.name);
-                shoeCardName.css({
-                    color: "gray"
-                });
-
-                let shoeLink = $("<a>");
-                shoeLink.attr("href", "/shoe/" + elem.id);
-                shoeLink.append(shoeCard);
-
-                shoeCardBody.append(shoeCardName);
-                shoeCard.append(shoeImg, shoeCardBody);
-                shoeLink.append(shoeCard)
-                newShoeCol.append(shoeLink)
-                $("#new-cards-div").append(newShoeCol);
-            }
-
-        })
+        if (selectedCategory === "all") {
+            $.ajax({
+                method: "GET",
+                url: "/api/shoes"
+            }).then(function(res) {
+    
+                for (elem of res) {
+                    let newShoeCol = $("<div>");
+                    newShoeCol.addClass("col-sm-4 col-xl-4");
+    
+                    let shoeCard = $("<div>");
+                    shoeCard.addClass("card shoe");
+                    
+                    let shoeImg = $("<img>");
+                    shoeImg.attr("src", elem.product_image);
+                    shoeImg.addClass("card-img-top");
+                    shoeImg.attr("alt", "a cute shoe");
+                    
+                    let shoeCardBody = $("<div>");
+                    shoeCardBody.addClass("card-body");
+                    
+                    let shoeCardName = $("<p>");
+                    shoeCardName.addClass("card-text");
+                    shoeCardName.text(elem.name);
+                    shoeCardName.css({
+                        color: "gray"
+                    });
+    
+                    let shoeLink = $("<a>");
+                    shoeLink.attr("href", "/shoe/" + elem.id);
+                    shoeLink.append(shoeCard);
+    
+                    shoeCardBody.append(shoeCardName);
+                    shoeCard.append(shoeImg, shoeCardBody);
+                    shoeLink.append(shoeCard)
+                    newShoeCol.append(shoeLink)
+                    $("#new-cards-div").append(newShoeCol);
+                }
+    
+            })
+        }
+        else {
+            $.ajax({
+                method: "POST",
+                url: "/api/shoes",
+                data: {
+                    styles: [selectedCategory]
+                }
+            }).then(function(res) {
+    
+                for (elem of res) {
+                    let newShoeCol = $("<div>");
+                    newShoeCol.addClass("col-sm-4 col-xl-4");
+    
+                    let shoeCard = $("<div>");
+                    shoeCard.addClass("card shoe");
+                    
+                    let shoeImg = $("<img>");
+                    shoeImg.attr("src", elem.product_image);
+                    shoeImg.addClass("card-img-top");
+                    shoeImg.attr("alt", "a cute shoe");
+                    
+                    let shoeCardBody = $("<div>");
+                    shoeCardBody.addClass("card-body");
+                    
+                    let shoeCardName = $("<p>");
+                    shoeCardName.addClass("card-text");
+                    shoeCardName.text(elem.name);
+                    shoeCardName.css({
+                        color: "gray"
+                    });
+    
+                    let shoeLink = $("<a>");
+                    shoeLink.attr("href", "/shoe/" + elem.id);
+                    shoeLink.append(shoeCard);
+    
+                    shoeCardBody.append(shoeCardName);
+                    shoeCard.append(shoeImg, shoeCardBody);
+                    shoeLink.append(shoeCard)
+                    newShoeCol.append(shoeLink)
+                    $("#new-cards-div").append(newShoeCol);
+                }
+    
+            })
+        }
         localStorage.removeItem('style');
     }
 
