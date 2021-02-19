@@ -58,6 +58,18 @@ module.exports = function(app) {
             }
         }
 
+        if (req.body.max_price) {
+            whereProps.price_max = {
+                [Op.lte]: req.body.max_price
+            }
+        }
+
+        if (req.body.years) {
+            whereProps.release_date.slice(-4) = {
+                [Op.or]: req.body.years
+            }
+        }
+
         
         db.Shoe.findAll({
             where: whereProps
