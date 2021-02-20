@@ -65,8 +65,8 @@ module.exports = function(app) {
         }
 
         if (req.body.years) {
-            whereProps.release_date.slice(-4) = {
-                [Op.or]: req.body.years
+            whereProps.release_date = {
+                [Op.regexp]: req.body.years.join("|")
             }
         }
 
