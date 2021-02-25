@@ -23,4 +23,15 @@ $(document).ready(function() {
         window.location.href="/search";
         
     });
+
+    $(".carousel-item").on("click", function() {
+        var carouselCategory = $(this).attr("id");
+
+        // Send the user to the search page and display all results in the category selected by the user
+        console.log(carouselCategory);
+        
+        // set category in local storage
+        localStorage.setItem("carousel", carouselCategory);
+        window.location.href="/search";
+    });
 })
