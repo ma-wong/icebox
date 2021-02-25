@@ -252,16 +252,16 @@ $(document).ready(function() {
 
 
             let shoeFilters = {
-                // gender: selectedGenders,
+                gender: selectedGenders,
                 us_size: usSizes,
                 eu_size: euSizes,
                 uk_size: ukSizes,
-                // brands: selectedBrands,
-                // styles: selectedStyles,
-                // colors: selectedColors,
+                brands: selectedBrands,
+                styles: selectedStyles,
+                colors: selectedColors,
                 years: selectedYears,
                 max_price: maxPrice,
-                // collabs: selectedCollaborators
+                collabs: selectedCollaborators
             }
             $.ajax({
                 method: "POST",
